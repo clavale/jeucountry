@@ -13,10 +13,13 @@
 <body>
 
     <div id="game-container">
-        <h1>Jeu des capitales</h1>
-        <p id="question"></p>
-        <input type="text" id="answer" placeholder="Entrez la capitale">
-        <button onclick="checkAnswer()">Vérifier</button>
+        <h1 class="title">Jeu des capitales</h1>
+        <p id="question">
+            <span class="question-text">Quelle est la capitale: </span> 
+            <span id="country-name"></span>
+        </p>
+        <input type="text" id="answer" placeholder="Entrez le  nom de la capitale du pays">
+        <button onclick="checkAnswer()" style="background-color: #FF5733;">Vérifier votre réponse</button>
         <button onclick="loadNewQuestion()">Nouvelle question</button>
         <p id="result"></p>
     </div>
@@ -26,8 +29,6 @@
 
 
         const countriesCapitals = {'Afghanistan': 'Kaboul', 'Afrique du Sud': 'Pretoria', 'Albanie': 'Tirana', 'Algérie': 'Alger', 'Allemagne': 'Berlin', 'Andorre': 'Andorre-la-Vieille', 'Angola': 'Luanda', 'Antigua-et-Barbuda': "Saint John's", 'Arabie saoudite': 'Riyad', 'Argentine': 'Buenos Aires', 'Arménie': 'Erevan', 'Australie': 'Canberra', 'Autriche': 'Vienne', 'Azerbaïdjan': 'Bakou', 'Bahamas': 'Nassau', 'Bahreïn': 'Manama', 'Bangladesh': 'Dacca', 'Barbade': 'Bridgetown', 'Bélarus': 'Minsk', 'Belgique': 'Bruxelles', 'Belize': 'Belmopan', 'Bénin': 'Porto-Novo', 'Bhoutan': 'Thimphou', 'Bolivie': 'Sucre', 'Bosnie-Herzégovine': 'Sarajevo', 'Botswana': 'Gaborone', 'Brésil': 'Brasilia', 'Brunei': 'Bandar Seri Begawan', 'Bulgarie': 'Sofia', 'Burkina Faso': 'Ouagadougou', 'Burundi': 'Gitega', 'Cambodge': 'Phnom Penh', 'Cameroun': 'Yaoundé', 'Canada': 'Ottawa', 'Cap-Vert': 'Praia', 'Colombie': 'Bogota', 'Comores': 'Moroni', 'Congo': 'Brazzaville', 'Corée du Nord': 'Pyongyang', 'Corée du Sud': 'Séoul', 'Costa Rica': 'San José', "Côte d'Ivoire": 'Yamoussoukro', 'Croatie': 'Zagreb', 'Cuba': 'La Havane', 'Danemark': 'Copenhague', 'Djibouti': 'Djibouti', 'Dominique': 'Roseau', 'Égypte': 'Le Caire', 'Émirats arabes unis': 'Abou Dabi', 'Équateur': 'Quito', 'Érythrée': 'Asmara', 'Espagne': 'Madrid', 'Estonie': 'Tallinn', 'Eswatini': 'Mbabane', 'États-Unis': 'Washington D.C.', 'Éthiopie': 'Addis-Abeba', 'Fidji': 'Suva', 'Finlande': 'Helsinki', 'France': 'Paris', 'Gabon': 'Libreville', 'Gambie': 'Banjul', 'Géorgie': 'Tbilissi', 'Ghana': 'Accra', 'Grèce': 'Athènes', 'Grenade': 'Saint-Georges', 'Guatemala': 'Guatemala', 'Guinée': 'Conakry', 'Guinée équatoriale': 'Malabo', 'Guinée-Bissau': 'Bissau', 'Guyana': 'Georgetown', 'Haïti': 'Port-au-Prince', 'Honduras': 'Tegucigalpa', 'Hongrie': 'Budapest', 'Chili': 'Santiago', 'Chine': 'Pékin', 'Chypre': 'Nicosie', 'Îles Salomon': 'Honiara', 'Inde': 'New Delhi', 'Indonésie': 'Jakarta', 'Irak': 'Bagdad', 'Iran': 'Téhéran', 'Irlande': 'Dublin', 'Islande': 'Reykjavík', 'Israël': 'Tel Aviv', 'Italie': 'Rome', 'Jamaïque': 'Kingston', 'Japon': 'Tokyo', 'Jordanie': 'Amman', 'Kazakhstan': 'Noursoultan', 'Kenya': 'Nairobi', 'Kirghizie': 'Bichkek', 'Kiribati': 'Tarawa-Sud', 'Kuwait': 'Koweït', 'Laos': 'Vientiane', 'Lesotho': 'Maseru', 'Lettonie': 'Riga', 'Liban': 'Beyrouth', 'Libéria': 'Monrovia', 'Libye': 'Tripoli', 'Liechtenstein': 'Vaduz', 'Lituanie': 'Vilnius', 'Luxembourg': 'Luxembourg', 'Macédoine du Nord': 'Skopje', 'Madagascar': 'Antananarivo', 'Malaisie': 'Kuala Lumpur', 'Malawi': 'Lilongwe', 'Maldives': 'Malé', 'Mali': 'Bamako', 'Malte': 'La Valette', 'Maroc': 'Rabat', 'Marshall': 'Majuro', 'Maurice': 'Port-Louis', 'Mauritanie': 'Nouakchott', 'Mexique': 'Mexico', 'Micronésie': 'Palikir', 'Moldavie': 'Chisinau', 'Monaco': 'Monaco', 'Mongolie': 'Oulan-Bator', 'Monténégro': 'Podgorica', 'Mozambique': 'Maputo', 'Myanmar (Birmanie)': 'Naypyidaw', 'Namibie': 'Windhoek', 'Nauru': 'Yaren', 'Népal': 'Katmandou', 'Nicaragua': 'Managua', 'Niger': 'Niamey', 'Nigéria': 'Abuja', 'Norvège': 'Oslo', 'Nouvelle-Zélande': 'Wellington', 'Oman': 'Mascate', 'Ouganda': 'Kampala', 'Ouzbékistan': 'Tachkent', 'Pakistan': 'Islamabad', 'Palaos': 'Melekeok', 'Palestine': 'Ramallah', 'Panama': 'Panama', 'Papouasie-Nouvelle-Guinée': 'Port Moresby', 'Paraguay': 'Asuncion', 'Pays-Bas': 'Amsterdam', 'Pérou': 'Lima', 'Philippines': 'Manille', 'Pologne': 'Varsovie', 'Portugal': 'Lisbonne', 'Qatar': 'Doha', 'République centrafricaine': 'Bangui', 'République démocratique du Congo': 'Kinshasa', 'République dominicaine': 'Saint-Domingue', 'Roumanie': 'Bucarest', 'Royaume-Uni': 'Londres', 'Russie': 'Moscou', 'Rwanda': 'Kigali', 'Sahara occidental': 'Laâyoune', 'Saint-Christophe-et-Niévès': 'Basseterre', 'Saint-Marin': 'Saint-Marin', 'Saint-Vincent-et-les-Grenadines': 'Kingstown', 'Sainte-Lucie': 'Castries', 'Salvador': 'San Salvador', 'Samoa': 'Apia', 'São Tomé and Príncipe': 'São Tomé', 'Sénégal': 'Dakar', 'Serbie': 'Belgrade', 'Seychelles': 'Victoria', 'Sierra Leone': 'Freetown', 'Singapour': 'Singapour', 'Slovaquie': 'Bratislava', 'Slovénie': 'Ljubljana', 'Somalie': 'Mogadiscio', 'Soudan': 'Khartoum', 'Soudan du Sud': 'Djouba', 'Sri Lanka': 'Sri Jayawardenapura Kotte', 'Suède': 'Stockholm', 'Suisse': 'Berne', 'Suriname': 'Paramaribo', 'Syrie': 'Damas', 'Tadjikistan': 'Douchanbé', 'Tanzanie': 'Dodoma', 'Thaïlande': 'Bangkok', 'Tchad': "N'Djamena", 'Tchéquie': 'Prague', 'Timor oriental': 'Dili', 'Togo': 'Lomé', 'Tonga': "Nuku'alofa", 'Trinité-et-Tobago': "Port-d'Espagne", 'Tunisie': 'Tunis', 'Turkménistan': 'Achgabat', 'Turquie': 'Ankara', 'Tuvalu': 'Funafuti', 'Ukraine': 'Kiev', 'Uruguay': 'Montevideo', 'Vanuatu': 'Port-Vila', 'Vatican': 'Cité du Vatican', 'Venezuela': 'Caracas', 'Viêt Nam': 'Hanoï', 'Yémen': 'Sanaa', 'Zambie': 'Lusaka', 'Zimbabwe': 'Harare'};
-
-
 
 
         const questionElement = document.getElementById("question");
@@ -54,20 +55,28 @@
             }
 
             if (userAnswer.toLowerCase() === currentQuestion.capital.toLowerCase()) {
-                resultElement.textContent = "Félicitation !,  Vous avez deviné sa capitale.";
+                resultElement.textContent = "Félicitation !,  Vous avez trouvé la capitale: " + currentQuestion.capital + ".";
             } else {
                 resultElement.textContent = "Désolé, vous n'avez pas trouvé la bonne réponse. sa capitale est :  " + currentQuestion.capital + ".";
             }
         }
 
         function loadNewQuestion() {
+            answerElement.classList.remove("gras"); // Réinitialise les classes de style mettre la couleur
             answerElement.value = "";
             resultElement.textContent = "";
             currentQuestion = newQuestion();
-            questionElement.textContent = "Devinez la capitale du pays suivant: " + currentQuestion.country;
-        }
+            const countryNameElement = document.getElementById("country-name") ;
+            countryNameElement.textContent = currentQuestion.country + " ?";
+            }
 
         loadNewQuestion();
+
+        // Exemple d'utilisation pour mettre en gras
+        function mettreEnGras() {
+                answerElement.classList.add("gras");
+        }
+        
     </script>
 </body>
 </html>

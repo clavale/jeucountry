@@ -57,3 +57,56 @@ button:hover {
     color: red; /* rouge */
     border: 1px solid red; /* Ajoute une bordure rouge */
 }
+
+.question-text {
+    color: blue;
+}
+
+.answer {
+    color: blue;
+}
+
+.title {
+    font-weight: bold;
+}
+
+
+/* Style de base pour le champ de saisie */
+#answer {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+/* Style pour la réponse correcte */
+#answer.correct {
+    color: green;
+}
+
+/* Style pour la réponse incorrecte */
+#answer.incorrect {
+    color: red;
+}
+
+
+#game-container {
+    background-color: white; /* Remplacez "blue" couleur arrière plan pour ma div*/
+}
+
+
+/* Pour mettre la réponse en gras */
+#answer.gras {
+    font-weight: bold;
+}
+
+/* Pour mettre la réponse en couleur */
+#answer.couleur {
+    color: red; /* Vous pouvez changer "red" à n'importe quelle couleur que vous préférez */
+}
+
+
+
+
+
+
+
+
