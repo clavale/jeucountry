@@ -1,3 +1,10 @@
+.bodyCapitale {
+            background-image: url('img_capitale.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
